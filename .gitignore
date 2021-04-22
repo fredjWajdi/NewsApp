@@ -2,3 +2,5 @@
 .gradle
 *.bin
 *.lock
+local.properties
+.gitattributes

@@ -1,4 +1,4 @@
-.idea/vcs.xml
+.idea/
+.gradle
 *.bin
 *.lock
-.idea/vcs.xml

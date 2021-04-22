@@ -1,12 +1,15 @@
 package com.wizzapps.android.newsapp.adapter;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +22,7 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     private List<News> mListNews;
+    private static final String LOG_TAG = NewsAdapter.class.getCanonicalName();
 
     public NewsAdapter(List<News> mListNews) {
         this.mListNews = mListNews;
@@ -90,7 +94,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                 String url = mListNews.get(position).getWebUrl();
                 Uri uri = Uri.parse(url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                context.startActivity(intent);
+                try {
+                    context.startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    Log.e(LOG_TAG, "Test: " + context.getString(R.string.application_not_found));
+                    Toast.makeText(context, context.getString(R.string.application_not_found), Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }

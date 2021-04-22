@@ -13,4 +13,5 @@
     <string name="settings_date_key" translatable="false">from_date</string>
     <string name="settings_date_label">From date</string>
     <string name="authors">Authors </string>
+    <string name="application_not_found">No browser found on the phone</string>
 </resources>

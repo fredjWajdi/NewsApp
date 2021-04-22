@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">News feed</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="no_data_available">No data available</string>
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_topic_label">Topic</string>
+    <string name="settings_topic_default_value" translatable="false">covid19</string>
+    <string name="settings_topic_key" translatable="false">topic</string>
+    <string name="settings_api_key_default_value" translatable="false">test</string>
+    <string name="settings_api_key_key" translatable="false">api_key</string>
+    <string name="settings_api_key_label">Api key</string>
+    <string name="settings_date_default_value" translatable="false">2021-01-01</string>
+    <string name="settings_date_key" translatable="false">from_date</string>
+    <string name="settings_date_label">From date</string>
+    <string name="authors">Authors </string>
+</resources>

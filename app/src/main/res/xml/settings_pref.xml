@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_menu_item">
+    <EditTextPreference
+        android:defaultValue="@string/settings_topic_default_value"
+        android:inputType="text"
+        android:key="@string/settings_topic_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/settings_topic_label" />
+    <EditTextPreference
+        android:defaultValue="@string/settings_api_key_default_value"
+        android:inputType="text"
+        android:key="@string/settings_api_key_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/settings_api_key_label" />
+    <EditTextPreference
+        android:defaultValue="@string/settings_date_default_value"
+        android:inputType="text"
+        android:key="@string/settings_date_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/settings_date_label" />
+</PreferenceScreen>

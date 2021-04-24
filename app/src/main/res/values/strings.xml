@@ -14,4 +14,5 @@
     <string name="settings_date_label">From date</string>
     <string name="authors">Authors </string>
     <string name="application_not_found">No browser found on the phone</string>
+    <string name="menu_refresh">Refresh</string>
 </resources>

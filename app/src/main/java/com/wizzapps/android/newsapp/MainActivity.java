@@ -9,6 +9,7 @@ import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +32,7 @@ import com.wizzapps.android.newsapp.settings.SettingsActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>>, SwipeRefreshLayout.OnRefreshListener {
 
     public static final String LOG_TAG = MainActivity.class.getName();
     private final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search";
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     ProgressBar progressBar;
     TextView noDataTxtView;
     List<News> mNewsData;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
         progressBar = findViewById(R.id.progress_circular);
         noDataTxtView = findViewById(R.id.no_data_txt_view);
+        swipeRefreshLayout = findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean isConnected = cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
         recyclerView = findViewById(R.id.list_of_items);
@@ -99,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             boolean isConnected = cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
             progressBar.setVisibility(View.GONE);
+            swipeRefreshLayout.setRefreshing(false);
             if (data != null && !data.isEmpty()) {
                 this.mNewsData.clear();
                 this.mNewsData.addAll(data);
@@ -132,11 +137,25 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.settings) {
+        if (id == R.id.menu_settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             return true;
+        } else if (id == R.id.menu_refresh) {
+            refreshNews();
+            progressBar.setVisibility(View.VISIBLE);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRefresh() {
+        Log.i(LOG_TAG, "Test: onRefresh");
+        refreshNews();
+    }
+
+    private void refreshNews() {
+        Log.i(LOG_TAG, "Test: refreshNews");
+        this.loaderManager.restartLoader(LOADER_ID_NEWS, null, this);
     }
 }

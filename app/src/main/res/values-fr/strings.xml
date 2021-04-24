@@ -15,4 +15,5 @@
     <string name="no_internet_connection">Pas de connexion Internet</string>
     <string name="authors">Auteurs</string>
     <string name="application_not_found">Aucun navigateur web trouvé sur le téléphone</string>
+    <string name="menu_refresh">rafraîchir</string>
 </resources>
